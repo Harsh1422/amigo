@@ -1,0 +1,30 @@
+.Heading
+{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   box-shadow: 1px 1px gainsboro 1px; 
+   background-color: #0d6efd;
+   position: sticky;
+}
+.logo p
+{
+    font-weight: 600;
+    font-size: 35px;
+    color: whitesmoke;
+    font-family: cursive;
+}
+.links
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.link
+{
+    text-decoration: none;
+    color: whitesmoke;
+}

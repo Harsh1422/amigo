@@ -1,0 +1,57 @@
+import React, { useState } from 'react';
+import html2pdf from 'html2pdf.js';
+import './App.css';
+
+const App = () => {
+  const [invoiceDetails, setInvoiceDetails] = useState({
+    clientName: '',
+    clientEmail: '',
+    dueDate: '',
+    amount: '',
+    description: '',
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInvoiceDetails({
+      ...invoiceDetails,
+      [name]: value,
+    });
+  };
+
+  const generateInvoice = () => {
+    const invoiceHTML = `
+      <div>
+        <h2>Invoice</h2>
+        <p><strong>Client Name:</strong> ${invoiceDetails.clientName}</p>
+        <p><strong>Client Email:</strong> ${invoiceDetails.clientEmail}</p>
+        <p><strong>Due Date:</strong> ${invoiceDetails.dueDate}</p>
+        <p><strong>Amount:</strong> ${invoiceDetails.amount}</p>
+        <p><strong>Description:</strong> ${invoiceDetails.description}</p>
+      </div>
+    `;
+
+    const pdfOptions = {
+      margin: 10,
+      filename: 'invoice.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    };
+
+    html2pdf().from(invoiceHTML).set(pdfOptions).save();
+  };
+
+  return (
+    <div className="App">
+      <h1>Simple Invoice Generator</h1>
+      <form>
+        <button type="button" onClick={generateInvoice}>
+          Generate Invoice
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default App;
